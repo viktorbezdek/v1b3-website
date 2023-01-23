@@ -1,7 +1,7 @@
 ---
 date: 2022-01-20
 title: \`lodash-fp\` by example
-category: code, functional-programming
+categories: code, functional-programming
 ---
 
 # `lodash-fp` by example

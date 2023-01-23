@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from "react"
 
-function Logo({ animate, dark, ...rest }: { dark?: boolean, animate?: boolean } & HTMLAttributes<Element>) {
+function Logo({ animate, ...rest }: { dark?: boolean, animate?: boolean } & HTMLAttributes<Element>) {
 	const [offset, setOffset] = React.useState(animate ? 1500 : 0)
 	const [arr, setArr] = React.useState(500)
 

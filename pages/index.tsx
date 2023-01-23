@@ -1,12 +1,9 @@
 import Head from "next/head"
 import Link from "next/link"
 
-import { Inter } from "@next/font/google"
 import fm, { FrontMatterResult } from "front-matter"
 import { readdirSync, readFileSync } from "fs"
 import Markdown from 'markdown-to-jsx'
-
-const inter = Inter({ subsets: ["latin"] })
 
 export default function Home({ posts }) {
 	return (
@@ -20,17 +17,26 @@ export default function Home({ posts }) {
 			<main className="mx-5 my-10">
 				<h2 className="mb-5 text-xl">Posts</h2>
 				<ul className="">
-					{posts.map(({ date, slug, title, category }) => {
+					{posts.map(({ date, slug, title, categories }) => {
 						return (
 							<li key={slug} className="flex items-baseline gap-5">
 								<time className="text-xs text-center uppercase">
 									{date}
 								</time>
-								<h3 className="text-3xl underline hover:text-red-600">
-									<Link href={`/posts/${slug}`}>
-										<Markdown>{title}</Markdown>
-									</Link>
-								</h3>
+								<div>
+									<h3 className="text-3xl underline hover:text-red-600">
+										<Link href={`/posts/${slug}`}>
+											<Markdown>{title}</Markdown>
+										</Link>
+									</h3>
+									<ul>
+										{categories?.map((category) => (
+											<li key={category} className="text-xs">
+												{category}
+											</li>
+										))}
+									</ul>
+								</div>
 							</li>
 						)
 					})}
@@ -43,7 +49,7 @@ export default function Home({ posts }) {
 type PostAttributes = {
 	date: string
 	title: string
-	category?: string
+	categories?: string
 }
 
 export async function getStaticProps() {
@@ -63,7 +69,7 @@ export async function getStaticProps() {
 				year: "numeric",
 			}),
 			title: post.attributes.title.replace(/\\`/gim, "`"),
-			category: post.attributes.category?.split(", "),
+			categories: post.attributes.categories?.split(", "),
 		}))
 	return {
 		props: {
