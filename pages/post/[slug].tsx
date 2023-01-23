@@ -1,4 +1,4 @@
-import type { GetStaticPaths, NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 import fm, { FrontMatterResult } from 'front-matter';
 import { readdirSync, readFileSync } from 'fs';
