@@ -1,0 +1,168 @@
+{
+  "id": "63c5689fd5fb641aa2080f51",
+  "title": "Functional JavaScript with Lodash FP",
+  "author": {
+    "id": "63c3b4b4a9663438468d34b8",
+    "name": "Viktor Bezdek",
+    "email": "viktor.bezdek@gmail.com",
+    "createdAt": "2023-01-15T08:09:25.076Z",
+    "updatedAt": "2023-01-16T15:06:04.067Z"
+  },
+  "publishedDate": "2023-01-15T23:00:00.000Z",
+  "category": { "id": "63c56899d5fb641aa2080f39", "name": "Guide" },
+  "status": "published",
+  "createdAt": "2023-01-16T15:09:19.390Z",
+  "updatedAt": "2023-01-16T15:42:03.926Z",
+  "content": [
+    {
+      "type": "p",
+      "children": [
+        { "text": "You can use the " },
+        { "text": "map", "code": true, "bold": true },
+        {
+          "text": " function from lodash/fp to traverse an object, and add a property to each item if a certain condition is met. Here is an example:"
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "children": [
+        {
+          "text": "import { map } from 'lodash/fp'\n\nconst obj = {a: {id: 1}, b: {id: 2}, c: {id: 3}}\n\nconst addProp = item => {\n  if (item.id % 2 === 0) {\n    return {...item, newProp: true}\n  }\n  return item\n}\n\nconst newObj = map(addProp, obj)\n"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "children": [
+        {
+          "text": "Filtering an array of objects based on multiple conditions:"
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "children": [
+        {
+          "text": "import { filter, flow } from 'lodash/fp'\n\nconst data = [\n  { name: 'Alice', age: 25, city: 'New York' },\n  { name: 'Bob', age: 30, city: 'Los Angeles' },\n  { name: 'Charlie', age: 35, city: 'New York' },\n  { name: 'David', age: 40, city: 'Chicago' },\n]\n\nconst filterByAge = flow(\n  filter(x => x.age > 30),\n  filter(x => x.city === 'New York')\n)\n\nconst filteredData = filterByAge(data)\n\nconsole.log(filteredData)\n\n// Output: [{ name: 'Charlie', age: 35, city: 'New York' }]\n"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "children": [
+        { "text": "Sorting an array of objects by multiple properties:" }
+      ]
+    },
+    {
+      "type": "code",
+      "children": [
+        {
+          "text": "import { sortBy, flow } from 'lodash/fp'\n\nconst data = [\n  { name: 'Bob', age: 30, city: 'Los Angeles' },\n  { name: 'David', age: 40, city: 'Chicago' },\n  { name: 'Charlie', age: 35, city: 'New York' },\n  { name: 'Alice', age: 25, city: 'New York' },\n]\n\nconst sortData = flow(\n  sortBy('city'),\n  sortBy('age')\n)\n\nconst sortedData = sortData(data)\n\nconsole.log(sortedData)\n\n/* Output:\n[\n  { name: 'Alice', age: 25, city: 'New York' },\n  { name: 'Charlie', age: 35, city: 'New York' },\n  { name: 'Bob', age: 30, city: 'Los Angeles' },\n  { name: 'David', age: 40, city: 'Chicago' }\n]\n*/\n"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "children": [
+        {
+          "text": "Grouping an array of objects by a property and counting the number of occurrences of each group:"
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "children": [
+        {
+          "text": "import { groupBy, mapValues, flow } from 'lodash/fp'\n\nconst data = [\n  { name: 'Alice', age: 25, city: 'New York' },\n  { name: 'Bob', age: 30, city: 'Los Angeles' },\n  { name: 'Charlie', age: 35, city: 'New York' },\n  { name: 'David', age: 40, city: 'Chicago' },\n]\n\nconst groupByCity = flow(\n  groupBy('city'),\n  mapValues(x => x.length)\n)\n\nconst groupedData = groupByCity(data)\n\nconsole.log(groupedData)\n\n// Output: { New York: 2, Los Angeles: 1, Chicago: 1 }\n"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "children": [
+        {
+          "text": "Finding the average of a specific property of an array of objects:"
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "children": [
+        {
+          "text": "import { meanBy, flow } from 'lodash/fp'\n\nconst data = [\n  { name: 'Alice', age: 25 },\n  { name: 'Bob', age: 30 },\n  { name: 'Charlie', age: 35 },\n  { name: 'David', age: 40 },\n]\n\nconst findAgeAvg = flow(\n  meanBy('age')\n)\n\nconst avgAge = findAgeAvg(data)\n\nconsole.log(avgAge)\n\n// Output: 32.5\n"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "children": [
+        {
+          "text": "Combining multiple operations to extract specific data from an array of objects:"
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "children": [
+        {
+          "text": "import { filter, map, flow } from 'lodash/fp'\n\nconst data = [  { name: 'Alice', age: 25, city: 'New York', hobbies: ['reading', 'music'] },\n  { name: 'Bob', age: 30, city: 'Los Angeles', hobbies: ['sports', 'movies'] },\n  { name: 'Charlie', age: 35, city: 'New York', hobbies: ['reading', 'cooking'] },\n  { name: 'David', age: 40, city: 'Chicago', hobbies: ['traveling', 'movies'] },\n]\n\nconst extractData = flow(\n  filter(x => x.city === 'New York'),\n  map(x => x.hobbies)\n)\n\nconst filteredData = extractData(data)\n\nconsole.log(filteredData)\n\n// Output: [['reading', 'music'], ['reading', 'cooking']]\n"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "children": [
+        { "text": "Chaining multiple " },
+        { "text": "map", "code": true, "bold": true },
+        { "text": " and " },
+        { "text": "filter", "code": true, "bold": true },
+        { "text": " to get data from a nested array of objects:" }
+      ]
+    },
+    {
+      "type": "code",
+      "children": [
+        {
+          "text": "import { map, filter, flow } from 'lodash/fp'\n\nconst data = [\n  {\n    name: 'Alice',\n    items: [\n      { id: 1, name: 'item1', category: 'A' },\n      { id: 2, name: 'item2', category: 'B' },\n    ],\n  },\n  {\n    name: 'Bob',\n    items: [\n      { id: 3, name: 'item3', category: 'A' },\n      { id: 4, name: 'item4', category: 'C' },\n    ],\n  },\n]\n\nconst extractData = flow(\n  map('items'),\n  filter(x => x.category === 'A'),\n  map(x => x.name)\n)\n\nconst filteredData = extractData(data)\n\nconsole.log(filteredData)\n\n// Output: ['item1', 'item3']\n"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "children": [
+        {
+          "text": "Flattening a nested array of objects and then filtering and grouping the data:"
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "children": [
+        {
+          "text": "import { flatten, filter, groupBy, flow } from 'lodash/fp'\n\nconst data = [\n  {\n    name: 'Alice',\n    items: [\n      { id: 1, name: 'item1', category: 'A' },\n      { id: 2, name: 'item2', category: 'B' },\n    ],\n  },\n  {\n    name: 'Bob',\n    items: [\n      { id: 3, name: 'item3', category: 'A' },\n      { id: 4, name: 'item4', category: 'C' },\n    ],\n  },\n]\n\nconst complexOperation = flow(\n  flatten,\n  filter(x => x.category === 'A'),\n  groupBy('name')\n)\n\nconst filteredData = complexOperation(data)\n\nconsole.log(filteredData)\n\n/* Output:\n{\n  item1: [{ id: 1, name: 'item1', category: 'A' }],\n  item3: [{ id: 3, name: 'item3', category: 'A' }]\n}\n*/\n"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "children": [
+        {
+          "text": "Chaining multiple operations to extract specific data from an array of nested objects:"
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "children": [
+        {
+          "text": "import { map, filter, flow } from 'lodash/fp'\n\nconst data = [\n  {\n    name: 'Alice',\n    items: [\n      { id: 1, name: 'item1', category: 'A', properties: {color: 'red', size: 'small'} },\n      { id: 2, name: 'item2', category: 'B', properties: {color: 'green', size: 'medium'} },\n    ],\n  },\n  {\n    name: 'Bob',\n    items: [\n      { id: 3, name: 'item3', category: 'A', properties: {color: 'blue', size: 'large'} },\n      { id: 4, name: 'item4', category: 'C', properties: {color: 'red', size: 'medium'} },\n    ],\n  },\n]\n\nconst extractData = flow(\n  map('items'),\n  filter(x => x.category === 'A'),\n  filter(x => x.properties.color === 'red'),\n  map(x => x.name)\n)\nconst filteredData = extractData(data)\nconsole.log(filteredData)\n// Output: ['item1']"
+        }
+      ]
+    }
+  ],
+  "tags": [
+    { "id": "63c568a4d5fb641aa2080f68", "name": "Lodash" },
+    { "id": "63c568afd5fb641aa2080f6b", "name": "Functional Javascript" }
+  ]
+}
