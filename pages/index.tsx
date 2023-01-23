@@ -25,7 +25,7 @@ export default function Home({ posts }) {
 								</time>
 								<div>
 									<h3 className="text-3xl underline hover:text-red-600">
-										<Link href={`/posts/${slug}`}>
+										<Link href={`/post/${slug}`}>
 											<Markdown>{title}</Markdown>
 										</Link>
 									</h3>
@@ -46,14 +46,14 @@ export default function Home({ posts }) {
 	)
 }
 
-type PostAttributes = {
+export type PostAttributes = {
 	date: string
 	title: string
 	categories?: string
 }
 
+export const rootDir = process.cwd() + "/content"
 export async function getStaticProps() {
-	const rootDir = process.cwd() + "/content"
 	const posts = readdirSync(rootDir)
 		.map((file) => {
 			return {
